@@ -40,4 +40,35 @@ class ExpressionWriterTest {
 
         assertThat(writer.expression).isEqualTo("(6)")
     }
+
+    @Test
+    fun `Clear action is parsed properly`() {
+        writer.processAction(CalculatorAction.Number(6))
+        writer.processAction(CalculatorAction.Op(Operation.ADD))
+        writer.processAction(CalculatorAction.Number(6))
+        writer.processAction(CalculatorAction.Clear)
+
+        assertThat(writer.expression).isEqualTo("")
+    }
+
+    @Test
+    fun `Delete action is parsed properly`() {
+        writer.processAction(CalculatorAction.Number(6))
+        writer.processAction(CalculatorAction.Op(Operation.ADD))
+        writer.processAction(CalculatorAction.Number(6))
+        writer.processAction(CalculatorAction.Number(6))
+        writer.processAction(CalculatorAction.Delete)
+
+        assertThat(writer.expression).isEqualTo("6+6")
+    }
+
+    @Test
+    fun `Two decimal are not parsed`() {
+        writer.processAction(CalculatorAction.Number(6))
+        writer.processAction(CalculatorAction.Decimal)
+        writer.processAction(CalculatorAction.Number(6))
+        writer.processAction(CalculatorAction.Decimal)
+
+        assertThat(writer.expression).isEqualTo("6.6")
+    }
 }
