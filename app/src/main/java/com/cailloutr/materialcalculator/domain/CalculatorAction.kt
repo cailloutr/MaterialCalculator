@@ -6,6 +6,6 @@ sealed interface CalculatorAction {
     object Clear: CalculatorAction
     object Delete: CalculatorAction
     object Parentheses: CalculatorAction
-    object Calcuate: CalculatorAction
+    object Calculate: CalculatorAction
     object Decimal: CalculatorAction
 }

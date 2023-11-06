@@ -5,7 +5,7 @@ class ExpressionWriter() {
     var expression = ""
     fun processAction(action: CalculatorAction) {
         when (action) {
-            CalculatorAction.Calcuate -> {
+            CalculatorAction.Calculate -> {
                 val parser = ExpressionParser(prepareForCalculation())
                 val evaluator = ExpressionEvaluator(parser.parse())
                 expression = evaluator.evaluate().toString()
